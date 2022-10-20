@@ -1,2 +1,2 @@
 # prediction-ui-embedded
-# Update to test git commit trigger
+# changes to demo the cloud build trigger from git commit

@@ -1,0 +1,28 @@
+# Definition of the component metadata
+name: Train MLP
+description: Train MLP Model
+# Definition of the component interface
+inputs:
+  - {name: project_id, type: String}
+  - {name: model_repo, type: String}
+  - {name: feature_path, type: Data}
+
+outputs:
+  - {name: metrics_path, type: Data}
+  
+# Definition of the component implementation
+
+implementation:
+  container:
+    image: gcr.io/your_project_id/mlptrainer:0.0.1  # replace your_project_id with your project_id
+    command: [
+      python3,
+      # Path of the program inside the container
+      /pipelines/component/src/component.py,
+    ]
+    args: [
+      --project_id, {inputValue: project_id},
+      --feature_path, {inputPath: feature_path},
+      --model_repo, {inputValue: model_repo},
+      --metrics_path, {outputPath: metrics_path}
+    ]

@@ -1,0 +1,28 @@
+# Definition of the component metadata
+name: Download Data
+description: Download the data from a GCP bucket and save into a local file
+# Definition of the component interface
+inputs:
+  - {name: project_id, type: String}
+  - {name: bucket, type: String}
+  - {name: file_name, type: String}
+
+outputs:
+  - {name: feature_path, type: Data}
+
+# Definition of the component implementation
+implementation:
+  container:
+    image: gcr.io/your_project_id/dataingestor:0.0.1    # replace your_project_id with your project_id
+    # command is a list of strings (command-line arguments).
+    command: [
+      python3,
+      # Path of the program inside the container
+      /pipelines/component/src/component.py
+    ]
+    args: [
+      --project_id, {inputValue: project_id},
+      --bucket, {inputValue: bucket},
+      --file_name, {inputValue: file_name},
+      --feature_path, {outputPath: feature_path}
+    ]
