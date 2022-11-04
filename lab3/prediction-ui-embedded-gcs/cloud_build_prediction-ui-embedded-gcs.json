@@ -9,7 +9,7 @@
         ]
     },
     {
-      "name": "python",
+      "name": "python:3.10.8-slim-buster",
       "entrypoint": "/bin/sh",
       "args": [
         "-c",
